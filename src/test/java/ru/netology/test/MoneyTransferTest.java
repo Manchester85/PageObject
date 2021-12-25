@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {
 
-    @Test
+    @BeforeEach
     void shouldTransferMoneyBetweenCards() {
-        open("http://localhost:9999");
-        val loginPage = new LoginPage();
-        val authInfo = DataHelper.getAuthInfo();
-        val verificationPage = loginPage.validLogin(authInfo);
-        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
+    open("http://localhost:9999");
+    val loginPage = new LoginPage();
+    val authInfo = DataHelper.getAuthInfo();
+    val verificationPage = loginPage.validLogin(authInfo);
+    val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+    verificationPage.validVerify(verificationCode);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class MoneyTransferTest {
         int balanceSecondCard = dashboardPage.getSecondCardBalance();
         val depositAccountPage = dashboardPage.firstDepositButton();
         val cardNumber = DataHelper.getSecondCardNumber();
-        String sum = "10000";
+        String sum = "21000";
         depositAccountPage.depositAccount(sum, cardNumber);
         assertEquals(balanceFirstCard + Integer.parseInt(sum), dashboardPage.getFirstCardBalance());
         assertEquals(balanceSecondCard - Integer.parseInt(sum), dashboardPage.getSecondCardBalance());
@@ -44,7 +44,7 @@ public class MoneyTransferTest {
         int balanceSecondCard = dashboardPage.getSecondCardBalance();
         val depositAccountPage = dashboardPage.secondDepositButton();
         val cardNumber = DataHelper.getFirstCardNumber();
-        String sum = "10000";
+        String sum = "11000";
         depositAccountPage.depositAccount(sum, cardNumber);
         assertEquals(balanceFirstCard - Integer.parseInt(sum), dashboardPage.getFirstCardBalance());
         assertEquals(balanceSecondCard + Integer.parseInt(sum), dashboardPage.getSecondCardBalance());

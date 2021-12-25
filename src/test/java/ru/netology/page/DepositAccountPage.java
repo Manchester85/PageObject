@@ -9,8 +9,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class DepositAccountPage {
     private SelenideElement heading = $(withText("Пополнение карты"));
-    private SelenideElement amount = $("[data-test-id=amount]");
-    private SelenideElement from = $("[data-test-id=from]");
+    private SelenideElement amount = $("[data-test-id=amount] input");
+    private SelenideElement from = $("[data-test-id=from] input");
     private SelenideElement button =$("[data-test-id=action-transfer]");
 
     public DashboardPage depositAccount(String sum, DataHelper.CardNumber cardNumber) {
